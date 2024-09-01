@@ -16,10 +16,10 @@ const addTopic = () => {
    return postdata
   }
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     try {
       e.preventDefault()
-      const respponse = fetch('http://localhost:3000/api/topics', {
+      const respponse = await fetch('http://localhost:3000/api/topics', {
               method: 'POST',
               body:JSON.stringify(postdata),
           })
