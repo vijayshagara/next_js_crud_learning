@@ -8,10 +8,11 @@ import { useRouter } from "next/navigation";
 
 
 const TopicList = () => {
+  let orgin_url = process.env.ORGIN_URL
   const [allData, setAllData] = useState([]);
   const router = useRouter()
   const getdata = async () => {
-    const response = await fetch("http://localhost:3000/api/topics");
+    const response = await fetch(`/api/topics`);
     const data = await response.json();
     if (data.length) {
       setAllData(data);

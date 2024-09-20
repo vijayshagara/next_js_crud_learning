@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const addTopic = () => {
+  const {ORGIN_URL} = process.env
   let [postdata,setPostData] = useState({
       title:"",
       description:""
@@ -22,7 +23,7 @@ const addTopic = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/topics', {
+      const response = await fetch(`/api/topics`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Ensure the content type is set for JSON data

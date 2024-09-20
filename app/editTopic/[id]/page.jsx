@@ -12,7 +12,7 @@ const EditTopic = ({ params }) => {
   const getdata = async () => {
     try {
       if (id) {
-        const response = await fetch(`http://localhost:3000/api/topics/${id}`);
+        const response = await fetch(`/api/topics/${id}`);
         const data = await response.json();
         console.log("🚀 ~ getdata ~ data:", data);
         if (data) {
