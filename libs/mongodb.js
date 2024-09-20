@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 let uri =
-  process.env.MONGODB_URI ||
-  "mongodb+srv://vijayshagara:imA8WKHYHnhtcpam@cluster0.izhgdaj.mongodb.net/next_crud";
+  process.env.MONGODB_URI
 
 const connectMongoDb = async () => {
   try {

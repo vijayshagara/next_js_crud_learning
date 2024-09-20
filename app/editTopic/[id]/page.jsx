@@ -30,7 +30,7 @@ const EditTopic = ({ params }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await fetch(`http://localhost:3000/api/topics/${id}`, {
+      await fetch(`api/topics/${id}`, {
         method: "PUT",
         body: JSON.stringify(singleData),
       });
