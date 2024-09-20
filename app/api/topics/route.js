@@ -1,5 +1,6 @@
 import connectMongoDb from "@/libs/mongodb";
 import Topic from "@/models/topic";
+import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -16,6 +17,7 @@ export async function POST(request) {
       },
       { status: 201 }
     );
+    redirect('/')
   } catch (error) {
     console.log("=======", error);
   }

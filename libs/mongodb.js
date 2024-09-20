@@ -5,7 +5,6 @@ let uri =
 
 const connectMongoDb = async () => {
   try {
-    console.log("========++++++++++++++++++++++++++");
     if (uri) {
       await mongoose.connect(uri);
     }

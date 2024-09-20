@@ -1,11 +1,14 @@
 "use client"
 import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const addTopic = () => {
   let [postdata,setPostData] = useState({
       title:"",
       description:""
   })
+  const router = useRouter();
   const handleChange = ({e,type})=>{
    if(type=='title'){
     postdata.title = e.target.value
@@ -16,19 +19,27 @@ const addTopic = () => {
    return postdata
   }
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault()
-      const respponse = await fetch('http://localhost:3000/api/topics', {
-              method: 'POST',
-              body:JSON.stringify(postdata),
-          })
-          console.log("res",respponse);
-      
+      const response = await fetch('http://localhost:3000/api/topics', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Ensure the content type is set for JSON data
+        },
+        body: JSON.stringify(postdata),
+      });
+
+      if (response.ok) {
+        // If the request is successful, navigate to the home page
+        router.push('/');
+      } else {
+        console.error('Failed to submit the data');
+      }
     } catch (error) {
-      console.log(error);
+      console.error('An error occurred:', error);
     }
-  }
+  };
   return (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
       <input
@@ -44,8 +55,11 @@ const addTopic = () => {
       onChange={(e)=>handleChange({e,type:"dis"})}
       />
 
-      <button className="bg-green-600 font-bold text-white py-3 px-6">
+     
+     <button className="bg-green-600 font-bold text-white py-3 px-6" onClick={() => router.push('/')}>
+     {/* <Link href={'/'}> */}
         Add Topic
+     {/* </Link>  */}
       </button>
     </form>
   );

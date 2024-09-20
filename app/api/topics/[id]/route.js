@@ -34,7 +34,6 @@ export async function GET(req, { params }) {
     const { id } = params;
     await connectMongoDb();
     const singleData = await Topic.findById(id);
-    console.log('singleData====',singleData);
     return NextResponse.json(
       singleData,
       {
