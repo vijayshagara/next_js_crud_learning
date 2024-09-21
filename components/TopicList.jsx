@@ -1,16 +1,12 @@
 "use client"; 
-
 import React, { useEffect, useState } from "react";
 import RemoveBtn from "./RemoveBtn";
 import Link from "next/link";
 import { HiPencilAlt } from "react-icons/hi";
-import { useRouter } from "next/navigation";
 
 
 const TopicList = () => {
-  let orgin_url = process.env.ORGIN_URL
   const [allData, setAllData] = useState([]);
-  const router = useRouter()
   const getdata = async () => {
     const response = await fetch(`/api/topics`);
     const data = await response.json();
@@ -30,7 +26,7 @@ const TopicList = () => {
           <div
           key={d._id}
             className="p-4 border border-slate-300 my-3 
-      flex justify-between gap-5 items-start"
+            flex justify-between gap-5 items-start"
           >
             <div>
               <h2 className="font-bold text-2xl">{d.title}</h2>
