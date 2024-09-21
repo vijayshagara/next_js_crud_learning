@@ -23,11 +23,22 @@ export async function POST(request) {
 
 export const GET = async () => {
   try {
+    // Ensure the database is connected
     await connectMongoDb();
-    const res = await Topic.find();
-    return NextResponse.json(res);
+    
+    // Fetch topics from MongoDB
+    const topics = await Topic.find();
+
+    // Simulate a delay
+    await new Promise((resolve) => setTimeout(resolve, 8000)); // Adjust the timeout (80 seconds is too long)
+
+    // Return the fetched topics
+    return NextResponse.json(topics);
   } catch (error) {
-    console.log("=======", error);
+    console.error("Error fetching topics:", error);
+    
+    // Return an error response
+    return NextResponse.json({ error: 'Failed to fetch topics' }, { status: 500 });
   }
 };
 
