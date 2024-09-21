@@ -8,7 +8,7 @@ import { HiPencilAlt } from "react-icons/hi";
 const TopicList = () => {
   const [allData, setAllData] = useState([]);
   const getdata = async () => {
-    const response = await fetch(`/api/topics`);
+    const response = await fetch("/api/topics");
     const data = await response.json();
     if (data.length) {
       setAllData(data);
