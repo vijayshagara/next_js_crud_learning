@@ -8,6 +8,7 @@ import { HiPencilAlt } from "react-icons/hi";
 const TopicList = () => {
   const [allData, setAllData] = useState([]);
   const getdata = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 15000)); // Adjust the timeout (80 seconds is too long)
     const response = await fetch("/api/topics");
     const data = await response.json();
     if (data.length) {
