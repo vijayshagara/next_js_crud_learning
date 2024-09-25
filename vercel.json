@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "api/topics": {
+        "maxDuration": 10
+      }
+    }
+  }

@@ -21,19 +21,43 @@ export async function POST(request) {
   }
 }
 
-export const GET = async () => {
+// export const GET = async () => {
+//   try {
+//     // Ensure the database is connected
+//     await connectMongoDb();
+    
+//     // Fetch topics from MongoDB
+//     const topics = await Topic.find();
+
+//     // Return the fetched topics
+//     return NextResponse.json(topics);
+//   } catch (error) {
+//     console.error("Error fetching topics:", error);
+    
+//     // Return an error response
+//     return NextResponse.json({ error: 'Failed to fetch topics' }, { status: 500 });
+//   }
+// };
+
+export const GET = async (req) => {
   try {
     // Ensure the database is connected
     await connectMongoDb();
-    
-    // Fetch topics from MongoDB
-    const topics = await Topic.find();
+
+    // Pagination logic
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get('page')) || 1;
+    const limit = parseInt(searchParams.get('limit')) || 10;
+    const skip = (page - 1) * limit;
+
+    // Fetch paginated topics from MongoDB
+    const topics = await Topic.find().skip(skip).limit(limit);
 
     // Return the fetched topics
     return NextResponse.json(topics);
   } catch (error) {
     console.error("Error fetching topics:", error);
-    
+
     // Return an error response
     return NextResponse.json({ error: 'Failed to fetch topics' }, { status: 500 });
   }
